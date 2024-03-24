@@ -2,6 +2,8 @@
 
 plugins {
     java
+    id(Plugins.pmd)
+    id(Plugins.check_style)
     id(Plugins.spring_boot) version PluginsVers.spring_boot
     id(Plugins.spring_dependency_managment) version PluginsVers.spring_dependency_managment
 }
@@ -41,7 +43,12 @@ dependencies {
     testImplementation(Libs.reactor_test)
     runtimeOnly(Libs.r2dbc_postgres)
 }
-
+pmd {
+    isConsoleOutput = true
+    toolVersion = PluginsVers.pmd
+    rulesMinimumPriority = 5
+    ruleSetFiles(files(rootProject.file("config/pmd/pmd-ruleset.xml")))
+}
 tasks.withType<Test> {
     useJUnitPlatform()
 }
