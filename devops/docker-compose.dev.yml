@@ -1,0 +1,31 @@
+version: "3.9"
+
+name: doc-share
+
+volumes:
+  db-data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge
+services:
+  app-db:
+    image: postgres:15-alpine
+    container_name: app-postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - app-network
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}:postgresuser
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}:defaultpassword
+      POSTGRES_DB: ${POSTGRES_DB}:docshare
+    ports:
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql.conf:ro
