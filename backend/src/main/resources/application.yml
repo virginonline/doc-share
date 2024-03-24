@@ -1,0 +1,28 @@
+spring:
+  config:
+    import: optional:file:.env.local[.properties]
+  application:
+    name: doc-share
+  liquibase:
+    enabled: true
+    default-schema: ${POSTGRES_SCHEMA}
+    change-log: classpath:db/db.changelog.yml
+  r2dbc:
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: r2dbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_SCHEMA}
+    pool:
+      enabled: true
+      initial-size: 10
+      max-idle-time: 1m
+      max-size: 10
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+
+minio:
+  bucket: ${MINIO_BUCKET}
+  url: ${MINIO_URL}
+  accessKey: ${MINIO_ACCESS_KEY}
+  secretKey: ${MINIO_SECRET_KEY}
