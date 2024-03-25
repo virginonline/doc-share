@@ -12,4 +12,4 @@ default:
 compose:
 	docker compose -f devops/docker-compose.dev.yml up --detach
 
-up: all run
+#up: build all images and up docker compose
