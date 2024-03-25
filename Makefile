@@ -10,6 +10,7 @@ endif
 default:
 	cat ./Makefile
 compose:
-	docker compose -f devops/docker-compose.dev.yml up --detach
+	docker compose -f devops/docker-compose.dev.yml --env-file devops/.env.local up --detach
+
 
 #up: build all images and up docker compose
