@@ -29,7 +29,6 @@ dependencies {
     implementation(Libs.spring_boot_starter_webflux)
     implementation(Libs.minio)
     implementation(Libs.liquibase)
-    implementation(Libs.pre_liquibase)
     implementation(Libs.spring_boot_starter_jpa)
     implementation(Libs.spring_boot_starter_r2dbc)
     implementation(Libs.slf4j_api)
