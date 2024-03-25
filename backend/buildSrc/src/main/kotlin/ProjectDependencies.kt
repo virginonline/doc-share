@@ -3,7 +3,6 @@ object LibVers {
     const val minio = "8.5.9"
     const val postgres = "42.7.3"
     const val liquibase = "4.26.0"
-    const val pre_liquibase = "1.5.0"
     const val slf4j = "2.0.9"
     const val r2dbc_postgres = "1.0.4-RELEASE"
     const val lombok = "1.18.30"
@@ -41,8 +40,7 @@ object Libs {
     const val postgres = "org.porstgresql:postgresql:${LibVers.postgres}"
     const val liquibase = "org.liquibase:liquibase-core:${LibVers.liquibase}"
     const val r2dbc_postgres = "org.postgresql:r2dbc-postgresql${LibVers.r2dbc_postgres}"
-    const val pre_liquibase =
-        "net.lbruun.springboot:preliquibase-spring-boot-starter:${LibVers.pre_liquibase}"
+
 }
 
 object PluginsVers {
