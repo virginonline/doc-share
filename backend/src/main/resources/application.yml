@@ -8,6 +8,8 @@ spring:
     default-schema: ${POSTGRES_SCHEMA}
     change-log: classpath:db/db.changelog.yml
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?currentSchema${POSTGRES_SCHEMA}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   r2dbc:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}

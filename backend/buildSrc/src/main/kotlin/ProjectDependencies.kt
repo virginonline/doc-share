@@ -4,7 +4,7 @@ object LibVers {
     const val postgres = "42.7.3"
     const val liquibase = "4.26.0"
     const val slf4j = "2.0.9"
-    const val r2dbc_postgres = "1.0.4-RELEASE"
+    const val r2dbc_postgres = "1.0.4.RELEASE"
     const val lombok = "1.18.30"
     const val jdbc = "6.1.5"
 }
