@@ -1,5 +1,4 @@
 @Suppress("DSL_SCOPE_VIOLATION")
-
 plugins {
     java
     id(Plugins.pmd)
@@ -14,17 +13,12 @@ version = "0.0.1"
 java {
     sourceCompatibility = JavaVersion.VERSION_21
 }
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
-
 repositories {
     mavenCentral()
+    maven {
+        url = uri("https://oss.sonatype.org/content/repositories/releases/")
+    }
 }
-
 dependencies {
     implementation(Libs.spring_boot_starter_webflux)
     implementation(Libs.minio)
@@ -37,10 +31,10 @@ dependencies {
     compileOnly(Libs.lombok)
     developmentOnly(Libs.spring_devtools)
     runtimeOnly(Libs.postgres)
+    runtimeOnly(Libs.r2dbc_postgres)
     annotationProcessor(Libs.lombok)
     testImplementation(Libs.spring_boot_starter_test)
     testImplementation(Libs.reactor_test)
-    runtimeOnly(Libs.r2dbc_postgres)
 }
 pmd {
     isConsoleOutput = true

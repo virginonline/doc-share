@@ -37,9 +37,9 @@ object Libs {
     const val lombok = "org.projectlombok:lombok:${LibVers.lombok}"
 
     // Database
-    const val postgres = "org.porstgresql:postgresql:${LibVers.postgres}"
+    const val postgres = "org.postgresql:postgresql:${LibVers.postgres}"
     const val liquibase = "org.liquibase:liquibase-core:${LibVers.liquibase}"
-    const val r2dbc_postgres = "org.postgresql:r2dbc-postgresql${LibVers.r2dbc_postgres}"
+    const val r2dbc_postgres = "org.postgresql:r2dbc-postgresql:${LibVers.r2dbc_postgres}"
 
 }
 
