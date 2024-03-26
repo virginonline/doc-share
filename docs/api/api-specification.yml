@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: docs-share
+  description: docs-share
+  version: 1.0.0
+servers:
+  - url: 'api/docshare/v1'
+tags:
+  - name: user-api
+    description: user api
+  - name: documents-api
+    description: documents api
+  - name: health-api
+    description: health check api
+  - name: comments-api
+    description: comments api
+paths:
+  /user:
+    post:
+      tags:
+        - user-api
+      summary: return user
+      description: return user
+      operationId: createUser
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserRequest"
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+    patch:
+      tags:
+        - user-api
+      operationId: updateUserById
+      description: update user
+      summary: return updated user
+      parameters:
+        - name: id
+          in: header
+          required: true
+      requestBody:
+        $ref: "#/components/schemas/UpdateUserRequest"
+      responses:
+        '200':
+          description: return updated user
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+    get:
+      tags:
+        - users-api
+      operationId: getUserById
+      summary: get user by id
+
+      parameters:
+        - name: userId
+          in: path
+      responses:
+        '200':
+          description: return user
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+  /documents:
+    post:
+      tags:
+        - documents-api
+
+      operationId: uploadDocument
+
+      description: upload document
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+    get:
+      operationId: getAllDocuments
+      description: get all documents where user allowed to access
+      responses:
+        200:
+          description: array of documents
+          content:
+            '*/*':
+              schema:
+                type: array
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+    patch:
+      tags:
+        - documents-api
+      description: updating document
+      operationId: updateDocumentById
+      parameters:
+        - name: id
+          in: path
+          required: true
+      requestBody:
+        $ref: "#/components/schemas/UpdateDocumentRequest"
+      responses:
+        '200':
+          description: document updated
+          content:
+            '*/*':
+              schema:
+                type: object
+    delete:
+      tags:
+        - documents-api
+      description: delete document by owner
+      operationId: deleteDocumentById
+      parameters:
+        - name: id
+          in: path
+      responses:
+        '204':
+          description: document deleted
+          content:
+            '*/*':
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppError'
+components:
+  schemas:
+    CreateUserRequest:
+      required:
+        - username
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    UpdateUserRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        avatar:
+          type: object
+        name:
+          type: string
+        password:
+          type: string
+        passwordConfirmation:
+          type: string
+    DeleteAvatarRequest:
+      type: string
+    UploadDocumentRequest:
+      required:
+        - file
+      type: object
+      properties:
+        name:
+          type: string
+        file:
+          type: object
+    UpdateDocumentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        property:
+          type: object
+    AppError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        reason:
+          type: string
+        message:
+          type: string
